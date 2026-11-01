@@ -12,8 +12,8 @@ export class Database implements OnModuleDestroy {
     }
     if (!this.client)
       this.client = createClient({
-        url: process.env.exeam_TURSO_DATABASE_URL || 'file:./serein.db',
-        authToken: process.env.exeam_TURSO_AUTH_TOKEN || undefined,
+        url: process.env.TURSO_DATABASE_URL || 'file:./serein.db',
+        authToken: process.env.TURSO_AUTH_TOKEN || undefined,
       });
     if (!this.ready)
       this.ready = this.client

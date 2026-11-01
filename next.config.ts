@@ -20,5 +20,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  outputFileTracingIncludes: { '/api/**': ['./node_modules/@libsql/*/**'] },
 };
 export default nextConfig;
