@@ -1,6 +1,6 @@
 # Avengee examples
 
-A project gallery and **Serein**, a boutique hotel-booking demo built with Next.js, React, TypeScript, and NestJS. Ticketing, massage booking, delivery, commerce, and ERP are clearly marked as planned projects.
+A project gallery and six fictional, interactive demos built with Next.js, React, TypeScript, and NestJS. Serein is a complete hotel-booking flow backed by the demo API. Goodtime ticketing, Still House massage booking, Good Neighbor delivery, Sunday Goods shop, and the Sunday Goods ERP workspace demonstrate their customer or operations flows with sample data.
 
 ## Run locally
 
@@ -11,7 +11,18 @@ npm ci
 npm run dev
 ```
 
-Open **http://localhost:3000** for the gallery, or **http://localhost:3000/stays** for Serein. No credentials are needed locally. The database is created automatically at `serein.db` and survives restarts. Do not commit database files.
+Open **http://localhost:3000** for the gallery. Demo routes:
+
+| Route | Demo | Main flow |
+| --- | --- | --- |
+| `/stays` | Serein stays | Search hotels, check availability, book, manage, and cancel |
+| `/tickets` | Goodtime | Choose an event, set ticket quantity, simulate payment, and print a ticket |
+| `/massage` | Still House | Choose a treatment and appointment, then reserve |
+| `/delivery` | Good Neighbor | Search dishes, build a basket, enter a delivery address, and place a demo order |
+| `/shop` | Sunday Goods shop | Browse products, adjust quantities, and complete a demo checkout |
+| `/erp` | Sunday Goods workspace | Review sample revenue and inventory, search orders, and mark orders complete |
+
+No credentials are needed locally. Serein's database is created automatically at `serein.db` and survives restarts. The other demos use fictional in-page data and do not process real payments or persist orders.
 
 ```sh
 npm test           # Real NestJS request integration tests, no listening socket needed
@@ -28,17 +39,22 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-The browser suite covers gallery → room selection → booking → reload → cancellation, mobile overflow, filters, and search reset. Run it against a local test database, never a shared production database. It creates demo reservations and cancels the end-to-end booking.
+The browser suite covers the Serein booking lifecycle and searches, plus the event ticket, massage reservation, delivery basket, shop checkout, and ERP order actions. Run it against a local test database, never a shared production database. Serein browser tests create demo reservations and cancel the end-to-end booking.
 
 ## What works
 
-- Responsive gallery with a live hotel project and five planned projects.
+- Responsive gallery with six interactive app demos.
 - Six fictional Thai hotels, destination/date/guest search, category/pool/price filters, and sorting.
 - Hotel details, room types, live inventory checks, and transparent THB pricing.
 - Guest details, validated dates/capacity, server-calculated totals, and simulated checkout.
 - Persistent reservations, private management links, manual lookup, and cancellation.
 - Atomic inventory checks and inserts, idempotent booking requests, token-protected access.
 - Loading, validation, empty, unavailable, and error states.
+- Fictional event ticketing with quantity totals and printable confirmation.
+- Massage treatment and appointment selection with reservation confirmation.
+- Local food search, basket totals, address entry, and delivery confirmation.
+- Product browsing, quantity controls, and demo checkout.
+- ERP overview with searchable sample orders, status updates, and stock watch.
 
 Prices are whole Thai baht, not satang; 10% demo taxes/fees are added once to the stay subtotal. Each booking reserves one room for 1–4 guests, 1–30 nights, with check-in within the next year. Check-in is inclusive and check-out exclusive. Inventory is tracked by room type and nightly occupancy.
 
@@ -72,7 +88,7 @@ Alternatively, after installing the official Vercel CLI and signing in, run `ver
 
 ```text
 app/                  Next.js pages, layouts, responsive stylesheet
-components/           Gallery/hotel search, detail, checkout, bookings UI
+components/           Gallery, hotel booking, ticketing, storefront, and ERP UI
 lib/client.ts         API client and browser-held booking access
 pages/api/            Same-origin Next.js → NestJS adapter
 packages/api/src/     NestJS controllers, validation, booking service, database

@@ -38,13 +38,22 @@ export default function SearchForm({
       className={`search-form ${compact ? 'compact' : ''}`}
       onSubmit={(event) => {
         event.preventDefault();
-        const nights = (Date.parse(value.checkOut) - Date.parse(value.checkIn)) / 86400000;
-        if (nights < 1 || nights > 30) {
+        // Read what the form shows, so choices made before hydration are not lost.
+        const data = new FormData(event.currentTarget);
+        const next: StaySearch = {
+          destination: String(data.get('destination') ?? ''),
+          checkIn: String(data.get('checkIn') ?? ''),
+          checkOut: String(data.get('checkOut') ?? ''),
+          guests: String(data.get('guests') ?? '2'),
+        };
+        setValue(next);
+        const nights = (Date.parse(next.checkOut) - Date.parse(next.checkIn)) / 86400000;
+        if (!(nights >= 1 && nights <= 30)) {
           setError('Choose a stay between 1 and 30 nights.');
           return;
         }
         setError('');
-        onSearch(value);
+        onSearch(next);
       }}
     >
       <div className="search-fields">
@@ -54,6 +63,7 @@ export default function SearchForm({
           </span>
           <select
             aria-label="Destination"
+            name="destination"
             value={value.destination}
             onChange={(e) => update('destination', e.target.value)}
           >
@@ -69,6 +79,7 @@ export default function SearchForm({
           </span>
           <input
             aria-label="Check-in"
+            name="checkIn"
             type="date"
             required
             min={dateAfter(0)}
@@ -83,6 +94,7 @@ export default function SearchForm({
           </span>
           <input
             aria-label="Check-out"
+            name="checkOut"
             type="date"
             required
             min={value.checkIn}
@@ -97,6 +109,7 @@ export default function SearchForm({
           </span>
           <select
             aria-label="Guests"
+            name="guests"
             value={value.guests}
             onChange={(e) => update('guests', e.target.value)}
           >
