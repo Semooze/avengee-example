@@ -111,9 +111,27 @@ export default function HotelDetail({ hotel, query }: { hotel: Hotel; query: str
         </div>
         <SearchForm initial={search} onSearch={update} compact />
         {loading && (
-          <p className="loading-state" role="status">
-            Checking rooms for your dates…
-          </p>
+          <>
+            <p className="loading-state" role="status">
+              Checking rooms for your dates…
+            </p>
+            <div className="room-list" aria-hidden>
+              {[0, 1].map((n) => (
+                <div key={n} className="room-card is-skeleton">
+                  <span className="skeleton-block" />
+                  <span className="skeleton-lines">
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                  <span className="skeleton-lines">
+                    <i />
+                    <i />
+                  </span>
+                </div>
+              ))}
+            </div>
+          </>
         )}
         {error && (
           <div className="error-panel" role="alert">

@@ -1,14 +1,10 @@
 import Link from 'next/link';
 import { ArrowUpLeft, Waves } from 'lucide-react';
+import { DemoBar } from '@/components/demo-bar';
 export function StayHeader() {
   return (
     <>
-      <div className="demo-bar">
-        <span>An Avengee demo · Fictional stays, real attention to detail</span>
-        <Link href="/">
-          Back to gallery <ArrowUpLeft size={13} />
-        </Link>
-      </div>
+      <DemoBar name="Serein" kind="Hotel booking" next={{ href: '/tickets', name: 'Goodtime' }} />
       <header className="stay-header shell">
         <Link href="/stays" className="serein-wordmark">
           serein<span>✳</span>
@@ -34,12 +30,12 @@ export function StayFooter() {
           <p>Thoughtful stays. Unhurried days.</p>
         </div>
         <div>
-          <Waves size={26} />
+          <Waves size={26} aria-hidden />
           <p>Made for the way you want to feel.</p>
         </div>
         <div>
           <Link href="/">
-            An experience by Avengee <ArrowUpLeft size={14} />
+            An experience by Avengee <ArrowUpLeft size={14} aria-hidden />
           </Link>
           <p>Demo only. No real reservations or charges.</p>
         </div>
