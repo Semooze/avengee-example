@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { LucideIcon } from 'lucide-react';
+import type { CSSProperties } from 'react';
 import {
   ArrowUpRight,
   ArrowRight,
@@ -12,7 +13,8 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { AvengeeLogo } from '@/components/avengee-logo';
-import { ScrollReveal } from '@/components/scroll-reveal';
+import { HeroConstellation } from '@/components/hero-constellation';
+import { LandingMotion } from '@/components/landing-motion';
 import { ShowcaseCarousel } from '@/components/showcase-carousel';
 import { showcases } from '@/components/showcase-data';
 
@@ -62,12 +64,23 @@ const principles = [
   { th: 'พัฒนาอย่างมืออาชีพ', en: 'Built to professional standards' },
 ];
 
+const manifesto =
+  'เราคือทีมออกแบบและพัฒนาดิจิทัลโปรดักต์ที่ทำงานร่วมกันตั้งแต่การค้นหาโจทย์ วางประสบการณ์ ออกแบบหน้าจอ ไปจนถึงพัฒนาและส่งมอบงานจริง ทุกเดโมสะท้อนวิธีคิดและมาตรฐานการทำงานของทีม'.split(
+    ' ',
+  );
+
+/** Per-element custom properties for the scroll-driven CSS. */
+const vars = (values: Record<string, number>) =>
+  Object.fromEntries(
+    Object.entries(values).map(([key, value]) => [`--${key}`, value]),
+  ) as CSSProperties;
+
 const CONTACT_URL = 'https://fastwork.co/user/avengee.team/web-development-12722725';
 
 export default function Gallery() {
   return (
     <div className="gallery-site">
-      <ScrollReveal />
+      <LandingMotion />
       <header className="gallery-nav">
         <div className="shell gallery-nav-inner">
           <AvengeeLogo />
@@ -85,70 +98,102 @@ export default function Gallery() {
               ลองใช้งานเดโม <ArrowUpRight size={15} aria-hidden />
             </Link>
           </nav>
+          <span className="nav-progress" aria-hidden />
         </div>
       </header>
       <main>
-        <section className="gallery-intro shell">
-          <div>
-            <div className="status-line">
-              <span aria-hidden /> ทีมดิจิทัลโปรดักต์ ·{' '}
-              <span lang="en">Digital product studio</span>
+        <section className="hero" data-scene="pin">
+          <div className="hero-stage">
+            <div className="hero-backdrop" aria-hidden />
+            <HeroConstellation />
+            <div className="shell hero-inner">
+              <div className="hero-copy">
+                <div className="status-line">
+                  <span aria-hidden /> ทีมดิจิทัลโปรดักต์ ·{' '}
+                  <span lang="en">Digital product studio</span>
+                </div>
+                <h1>
+                  ไอเดียดี ๆ
+                  <br />
+                  <span className="hero-accent">ที่ได้ลองใช้จริง</span>
+                </h1>
+                <p className="intro-en" lang="en">
+                  Good ideas, made real enough to use.
+                </p>
+                <p className="hero-lede">
+                  เราออกแบบและพัฒนาดิจิทัลโปรดักต์ ตั้งแต่ตั้งโจทย์ ออกแบบประสบการณ์
+                  ไปจนถึงระบบที่ใช้งานได้จริง ลองกดใช้เดโมทั้ง 6 ชิ้นด้านล่างได้เลย
+                </p>
+                <div className="intro-actions">
+                  <a href="#projects" className="button">
+                    ดูผลงาน <span className="en">· See our work</span>
+                    <ArrowRight size={16} aria-hidden />
+                  </a>
+                  <a href="#contact" className="button secondary">
+                    คุยโปรเจกต์กับเรา <span className="en">· Start a project</span>
+                  </a>
+                </div>
+                <ul className="proof-row">
+                  <li>
+                    <Sparkles size={16} aria-hidden /> 6 เดโมที่ใช้งานได้จริง{' '}
+                    <span lang="en">· 6 live demos</span>
+                  </li>
+                  <li>
+                    <CodeXml size={16} aria-hidden /> ออกแบบถึงโค้ด{' '}
+                    <span lang="en">· Design to code</span>
+                  </li>
+                  <li>
+                    <MonitorSmartphone size={16} aria-hidden /> รองรับมือถือ{' '}
+                    <span lang="en">· Mobile-ready</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <h1>
-              ไอเดียดี ๆ
-              <br />
-              ที่ได้ลองใช้จริง
-            </h1>
-            <p className="intro-en" lang="en">
-              Good ideas, made real enough to use.
-            </p>
-          </div>
-          <div className="intro-aside">
-            <p>
-              เราออกแบบและพัฒนาดิจิทัลโปรดักต์ ตั้งแต่ตั้งโจทย์ ออกแบบประสบการณ์
-              ไปจนถึงระบบที่ใช้งานได้จริง ลองกดใช้เดโมทั้ง 6 ชิ้นด้านล่างได้เลย
-            </p>
-            <div className="intro-actions">
-              <a href="#projects" className="button">
-                ดูผลงาน <span className="en">· See our work</span>
-                <ArrowRight size={16} aria-hidden />
-              </a>
-              <a href="#contact" className="button secondary">
-                คุยโปรเจกต์กับเรา <span className="en">· Start a project</span>
-              </a>
+            <div className="scroll-cue" aria-hidden>
+              <span className="scroll-cue-mouse" />
+              เลื่อนลง <span lang="en">· Scroll</span>
             </div>
-            <ul className="proof-row">
-              <li>
-                <Sparkles size={16} aria-hidden /> 6 เดโมที่ใช้งานได้จริง{' '}
-                <span lang="en">· 6 live demos</span>
-              </li>
-              <li>
-                <CodeXml size={16} aria-hidden /> ออกแบบถึงโค้ด{' '}
-                <span lang="en">· Design to code</span>
-              </li>
-              <li>
-                <MonitorSmartphone size={16} aria-hidden /> รองรับมือถือ{' '}
-                <span lang="en">· Mobile-ready</span>
-              </li>
-            </ul>
+            <div className="stack-marquee">
+              <span className="stack-label">
+                เครื่องมือที่เราใช้ <span lang="en">· Built with</span>
+              </span>
+              <div className="marquee-window">
+                <div className="marquee-track" lang="en">
+                  <ul>
+                    {stack.map((tool) => (
+                      <li key={tool}>{tool}</li>
+                    ))}
+                  </ul>
+                  <ul aria-hidden>
+                    {stack.map((tool) => (
+                      <li key={tool}>{tool}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
-        <section id="projects" className="projects-section shell">
-          <div className="section-heading">
-            <div>
-              <span className="kicker" lang="en">
-                Selected work
-              </span>
-              <h2>
-                ผลงานของทีม <span className="count-chip">06</span>
-              </h2>
+        <section id="projects" className="projects-section">
+          <div className="shell">
+            <div className="section-heading">
+              <div>
+                <span className="kicker" lang="en">
+                  Selected work
+                </span>
+                <h2>
+                  ผลงานของทีม <span className="count-chip">06</span>
+                </h2>
+              </div>
+              <p className="muted">
+                ทุกชิ้นเป็นเดโมที่กดใช้ได้จริง ข้อมูลทั้งหมดเป็นตัวอย่าง
+                <span lang="en">All demos are interactive; data is fictional</span>
+              </p>
             </div>
-            <p className="muted">
-              ทุกชิ้นเป็นเดโมที่กดใช้ได้จริง ข้อมูลทั้งหมดเป็นตัวอย่าง
-              <span lang="en">All demos are interactive; data is fictional</span>
-            </p>
+            <div className="showcase-stage" data-scene="enter">
+              <ShowcaseCarousel />
+            </div>
           </div>
-          <ShowcaseCarousel />
         </section>
         <section id="services" className="services-section shell" data-reveal>
           <div className="section-intro">
@@ -158,10 +203,13 @@ export default function Gallery() {
             <h2>สิ่งที่เราทำ</h2>
           </div>
           <div className="services-grid">
-            {services.map((service) => (
-              <article className="service-item" key={service.en}>
+            {services.map((service, index) => (
+              <article className="service-item" key={service.en} data-spotlight>
+                <span className="service-index" aria-hidden>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
                 <span className="service-icon" aria-hidden>
-                  <service.icon size={20} strokeWidth={1.7} />
+                  <service.icon size={22} strokeWidth={1.7} />
                 </span>
                 <h3>
                   {service.th}
@@ -172,40 +220,41 @@ export default function Gallery() {
             ))}
           </div>
         </section>
-        <section id="process" className="process-section shell" data-reveal>
-          <div className="section-intro">
-            <span className="kicker" lang="en">
-              How we work
-            </span>
-            <h2>วิธีทำงานของเรา</h2>
-          </div>
-          <ol className="process-steps">
-            {steps.map((step, index) => (
-              <li key={step.en}>
-                <span className="process-number" aria-hidden>
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3>
-                  {step.th} <span lang="en">· {step.en}</span>
-                </h3>
-                <p>{step.text}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="stack-strip">
-            <span>
-              เครื่องมือที่เราใช้ <span lang="en">· Built with</span>
-            </span>
-            <ul lang="en">
-              {stack.map((tool) => (
-                <li key={tool}>{tool}</li>
+        <section id="process" className="process-section" data-scene="pin">
+          <div className="shell process-stage">
+            <div className="process-intro">
+              <span className="kicker" lang="en">
+                How we work
+              </span>
+              <h2>วิธีทำงานของเรา</h2>
+              <p>
+                สี่ขั้นตอนที่ชัดเจน เห็นความคืบหน้าทุกสัปดาห์{' '}
+                <span lang="en">· Four clear steps, visible progress every week.</span>
+              </p>
+              <div className="process-meter" aria-hidden>
+                <span />
+              </div>
+            </div>
+            <ol className="process-steps" style={vars({ steps: steps.length })}>
+              {steps.map((step, index) => (
+                <li key={step.en} style={vars({ i: index })}>
+                  <span className="process-number" aria-hidden>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <h3>
+                      {step.th} <span lang="en">· {step.en}</span>
+                    </h3>
+                    <p>{step.text}</p>
+                  </div>
+                </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </section>
-        <section className="about-section" id="about" data-reveal>
-          <div className="shell about-inner">
-            <div>
+        <section className="about-section" id="about" data-scene="pin">
+          <div className="shell about-stage">
+            <div className="about-heading">
               <span className="kicker" lang="en">
                 Our approach
               </span>
@@ -215,28 +264,32 @@ export default function Gallery() {
                 ใส่ใจทุกขั้นตอน
               </h2>
             </div>
-            <div>
-              <p>
-                เราคือทีมออกแบบและพัฒนาดิจิทัลโปรดักต์ที่ทำงานร่วมกันตั้งแต่การค้นหาโจทย์
-                วางประสบการณ์ ออกแบบหน้าจอ ไปจนถึงพัฒนาและส่งมอบงานจริง
-                ทุกเดโมสะท้อนวิธีคิดและมาตรฐานการทำงานของทีม
-              </p>
-              <ul className="principles">
-                {principles.map((item) => (
-                  <li key={item.en}>
-                    <span className="feature-check" aria-hidden>
-                      <Check size={13} strokeWidth={2.5} />
-                    </span>
-                    {item.th} <span lang="en">· {item.en}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <p className="manifesto" style={vars({ n: manifesto.length })}>
+              {manifesto.map((phrase, index) => (
+                <span key={index} style={vars({ i: index })}>
+                  {phrase}{' '}
+                </span>
+              ))}
+            </p>
+            <ul className="principles">
+              {principles.map((item) => (
+                <li key={item.en}>
+                  <span className="feature-check" aria-hidden>
+                    <Check size={13} strokeWidth={2.5} />
+                  </span>
+                  {item.th} <span lang="en">· {item.en}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
         <section id="contact" className="contact-section shell" data-reveal>
           <div className="contact-band">
+            <div className="contact-glow" aria-hidden />
             <div>
+              <span className="kicker" lang="en">
+                Let’s talk
+              </span>
               <h2>มีไอเดียอยู่ในใจ? มาคุยกัน</h2>
               <p lang="en">Have an idea? Let’s make it real — tell us what you’re building.</p>
             </div>
